@@ -46,8 +46,8 @@ const Jackstoryroutees = () => {
   const [atribParam, setAtribParam] = useState(null);
   console.log('atribParam==>', atribParam);
   console.log('sab1==>', sab1);
-  //const [idfa, setIdfa] = useState(null);
-  //const [aceptTransperency, setAceptTransperency] = useState(false);
+  const [idfa, setIdfa] = useState(null);
+  const [aceptTransperency, setAceptTransperency] = useState(false);
   const [adServicesAtribution, setAdServicesAtribution] = useState(null);
   const [isDataReady, setIsDataReady] = useState(false);
   const [completeLink, setCompleteLink] = useState(false);
@@ -143,15 +143,11 @@ const Jackstoryroutees = () => {
         setFinalLink(parsedData.finalLink);
         setCloacaPass(parsedData.cloacaPass);
         setCustomUserAgent(parsedData.customUserAgent);
-        //setIdfa(parsedData.idfa ?? null);
-        //setAceptTransperency(parsedData.aceptTransperency ?? false);
+        setIdfa(parsedData.idfa ?? null);
+        setAceptTransperency(parsedData.aceptTransperency ?? false);
 
         await performAppsFlyerOperationsContinuously();
       } else {
-
-        //await fetchIdfa();
-        //logActivateApp();
-        //logTestEvent();
 
         // Якщо дані не знайдені в AsyncStorage
         const results = await Promise.all([
@@ -184,8 +180,8 @@ const Jackstoryroutees = () => {
         checkAsaData,
         cloacaPass,
         customUserAgent,
-        //idfa,
-        //aceptTransperency,
+        idfa,
+        aceptTransperency,
       };
       const jsonData = JSON.stringify(data);
       await AsyncStorage.setItem('App', jsonData);
@@ -210,8 +206,8 @@ const Jackstoryroutees = () => {
     checkAsaData,
     cloacaPass,
     customUserAgent,
-    //idfa,
-    //aceptTransperency,
+    idfa,
+    aceptTransperency,
   ]);
 
   const fetchAdServicesAttributionData = async () => {
@@ -238,47 +234,6 @@ const Jackstoryroutees = () => {
     }
   };
 
-  // IDFA / ATT status
-  {/** 
-  const fetchIdfa = async () => {
-    try {
-      const res = await ReactNativeIdfaAaid.getAdvertisingInfo();
-
-      if (!res.isAdTrackingLimited) {
-        setIdfa(res.id);
-
-        Settings.setAdvertiserTrackingEnabled(true);
-
-        //setTimeout(() => {
-          setAceptTransperency(true);
-        //}, 1500);
-        return true;
-      } else {
-        setIdfa('00000000-0000-0000-0000-000000000000');
-
-        Settings.setAdvertiserTrackingEnabled(false);
-
-        //setTimeout(() => {
-          setAceptTransperency(true);
-        //}, 2500);
-        console.log('НЕ ЗГОДА!!!!!!!!!');
-
-        return false;
-      }
-    } catch (err) {
-      setIdfa(null);
-
-      Settings.setAdvertiserTrackingEnabled(false);
-
-      setAceptTransperency(true);
-      console.log('Помилка отримання IDFA:', err);
-
-      return false;
-
-    }
-  };
-*/}
-  
   ///////// OneSignall
   const requestPermission = () => {
     return new Promise((resolve, reject) => {
