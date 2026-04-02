@@ -66,7 +66,7 @@ const Jackstoryroutees = () => {
 
   const ONESIGNAL_KEY = `530a0e10-6693-4d3f-8ab7-173654f895b8`;
 
-  const TARGET_DATA = new Date(2026, 2, 2, 8, 8, 0);
+  const TARGET_DATA = new Date(2026, 3, 3, 8, 8, 0);
 
   useEffect(() => {
     const fetchData = async () => {
